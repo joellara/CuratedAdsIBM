@@ -1,5 +1,5 @@
 angular.module('curatedAdsIBM')
-.controller('MainCtrl', function ($scope) {
+.controller('MainCtrl', function ($scope,$http) {
     var _video = null,
         patData = null;
 
@@ -83,6 +83,10 @@ angular.module('curatedAdsIBM')
      */
     var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
         $scope.snapshotData = imgBase64;
+        console.log('entro');
+        $http.post('/detectface',{imgBase64}).then(function(){
+            console.log('termino');
+        });
     };
 
     // var getPixelData = function getPixelData(data, width, col, row, offset) {
