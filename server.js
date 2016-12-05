@@ -2,7 +2,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var watson = require('watson-developer-cloud');
-var multer = require('multer');
+var uuid = require('uuid');
+var os = require('os');
+var fs = require('fs');
+var path = require('path');
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
@@ -36,10 +39,11 @@ app.upload = upload;
 var appEnv = cfenv.getAppEnv();
 //API request
 app.post('/detectface',function(req,res){
-  var img = req.body.imgBase64;
-    params = {
-      images_file: {img}
-    };
+    var resource = req.body.imgBase64;
+    var temp = path.join(os.tmpdir(), uuid.v1() + '.png');
+    fs.writeFileSync(temp, resource);
+    var params= {};
+    params.images_file = fs.createReadStream(temp);
     visual_recognition.detectFaces(params,
     function(err, response) {
       if (err)
@@ -58,3 +62,4 @@ app.get('*', function(req, res) {
 app.listen(appEnv.port, appEnv.bind, function() {
 	console.log("server starting on " + appEnv.url);
 });
+;

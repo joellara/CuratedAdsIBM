@@ -83,7 +83,6 @@ angular.module('curatedAdsIBM')
      */
     var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
         $scope.snapshotData = imgBase64;
-        console.log('entro');
         $http.post('/detectface',{imgBase64}).then(function(){
             console.log('termino');
         });
