@@ -11,6 +11,7 @@ var path = require('path');
 var cfenv = require('cfenv');
 
 var app = express();
+
 var visual_recognition = watson.visual_recognition({
 	api_key: '81c4ef028bae3feb49ee20b85cc339e39aeb56c5',
 	version: 'v3',
@@ -37,11 +38,12 @@ function parseBase64Image(imageString) {
   resource.data = new Buffer(matches[2], 'base64');
   return resource;
 }
+
 app.post('/detectface',function(req,res){
 
   //Save to temp
   var resource = parseBase64Image(req.body.imgBase64);
-  var temp = path.join(os.tmpdir(), 'tempImage.png');
+  var temp = path.join(os.tmpdir(), 'tempImage' + resource.type);
   fs.writeFileSync(temp, resource.data);
   var params= {};
   params.images_file = fs.createReadStream(temp);

@@ -11,9 +11,6 @@ angular.module('curatedAdsIBM')
 
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
 
-    // Setup a channel to receive a video property
-    // with a reference to the video element
-    // See the HTML binding in main.html
     $scope.channel = {};
 
     $scope.webcamError = false;
