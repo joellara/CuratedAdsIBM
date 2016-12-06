@@ -3,10 +3,6 @@ angular.module('curatedAdsIBM')
     var _video = null,
         patData = null;
 
-    $scope.showDemos = false;
-    $scope.edgeDetection = false;
-    $scope.mono = false;
-    $scope.invert = false;
     $scope.result = "";
 
     $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
@@ -28,7 +24,6 @@ angular.module('curatedAdsIBM')
         $scope.$apply(function() {
             $scope.patOpts.w = _video.width;
             $scope.patOpts.h = _video.height;
-            $scope.showDemos = true;
         });
     };
 

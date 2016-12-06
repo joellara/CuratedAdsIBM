@@ -43,7 +43,7 @@ app.post('/detectface',function(req,res){
 
   //Save to temp
   var resource = parseBase64Image(req.body.imgBase64);
-  var temp = path.join(os.tmpdir(), 'tempImage' + resource.type);
+  var temp = path.join(os.tmpdir(), 'tempImage.' + resource.type);
   fs.writeFileSync(temp, resource.data);
   var params= {};
   params.images_file = fs.createReadStream(temp);
@@ -65,4 +65,3 @@ app.get('*', function(req, res) {
 app.listen(appEnv.port, appEnv.bind, function() {
 	console.log("server starting on " + appEnv.url);
 });
-;
