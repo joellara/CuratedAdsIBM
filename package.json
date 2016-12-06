@@ -2,7 +2,7 @@
   "name": "NodejsStarterApp",
   "version": "0.0.1",
   "private": true,
-  "main":"server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -20,5 +20,8 @@
   "repository": {},
   "engines": {
     "node": "4.x"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
