@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 //API request
-function parseBase64Image(imageString) {
-  var matches = imageString.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+function parseBase64Image(imageBase64) {
+  var matches = imageBase64.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
   var resource = {};
 
   if (matches.length !== 3) {
@@ -58,7 +58,7 @@ app.post('/detectface',function(req,res){
 });
 //Send to Angular
 app.get('*', function(req, res) {
-	res.sendFile(__dirname+'/public/index.html');
+	res.sendFile(path.join(__dirname,'/public/index.html'));
 });
 
 //Start server
