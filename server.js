@@ -21,42 +21,43 @@ app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));                                 
-/*            
-var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, os.tmpdir());
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-var upload = multer({
-  storage: storage
-});
-app.upload = upload;
-*/
+
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 //API request
+function parseBase64Image(imageString) {
+  var matches = imageString.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+  var resource = {};
+
+  if (matches.length !== 3) {
+    return null;
+  }
+
+  resource.type = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+  resource.data = new Buffer(matches[2], 'base64');
+  return resource;
+}
 app.post('/detectface',function(req,res){
-    var resource = req.body.imgBase64;
-    var temp = path.join(os.tmpdir(), uuid.v1() + '.png');
-    fs.writeFileSync(temp, resource);
-    var params= {};
-    params.images_file = fs.createReadStream(temp);
-    visual_recognition.detectFaces(params,
+
+  //Save to temp
+  var resource = parseBase64Image(req.body.imgBase64);
+  var temp = path.join(os.tmpdir(), 'tempImage.png');
+  fs.writeFileSync(temp, resource.data);
+  var params= {};
+  params.images_file = fs.createReadStream(temp);
+  visual_recognition.detectFaces(params,
     function(err, response) {
       if (err)
-        console.log(err);
+        res.status(400).json({error:err});
       else
-        console.log(JSON.stringify(response, null, 2));
-    });
+        res.status(200).json({data:JSON.stringify(response, null, 2)});
+    }
+  );
 });
 //Send to Angular
 app.get('*', function(req, res) {
 	res.sendFile(__dirname+'/public/index.html');
 });
-
 
 //Start server
 app.listen(appEnv.port, appEnv.bind, function() {
