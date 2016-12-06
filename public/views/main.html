@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron">
-    <h1>Curated Ads depending on people</h1>
+    <h1>Anuncios publicitarios dependiendo de la persona.</h1>
     <p>Toma un snapshot para analizarla</p>
     </div>
     <div class="row">
@@ -23,16 +23,16 @@
             <button class="btn btn-lg btn-primary" ng-click="makeSnapshot()">Toma snapshot!</button>
         </div>
         <div class="col-md-2">
-            <h3>Age:</h3>
+            <h3>Edad:</h3>
         </div>
         <div class="col-md-2">
-            <h3>{{ ((result.age.min + result.age.min)/2) || 0}}</h3>
+            <h3>{{  (result.averageAge) || 0}}</h3>
         </div>
         <div class="col-md-2">
-            <h3>Gender:</h3>
+            <h3>Genero:</h3>
         </div>
         <div class="col-md-2">
-            <h3>{{result.gender.gender}}</h3>
+            <h3>{{result.parsedGender}}</h3>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
             <canvas id="snapshot"></canvas>
         </div>
         <div class="col-md-6">
-            <img ng-src="{{result.img}}" alt="Coca cola"/>
+            <img ng-src="{{result.img}}" alt="{{result.alt}}"/>
         </div>
     </div>
 </div>

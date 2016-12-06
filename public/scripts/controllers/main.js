@@ -65,7 +65,32 @@ angular.module('curatedAdsIBM')
         $scope.snapshotData = imgBase64;
         $http.post('/detectface',{imgBase64}).then(function successCallback(response){
             $scope.result = JSON.parse(response.data.data).images[0].faces[0];
-            $scope.result.img = "images/cocacola.jpg";
+            $scope.result.averageAge = Math.floor(($scope.result.age.min + $scope.result.age.max)/2);
+            if($scope.result.gender.gender  == "FEMALE"){
+                if($scope.result.averageAge <18){
+                    $scope.result.parsedGender = "Mujer";
+                    $scope.result.img = "images/18.jpg";
+                    $scope.result.alt = "Menor a 18 mujer";
+                }else if($scope.result.averageAge <30){
+                    $scope.result.img = "images/30.jpg";
+                    $scope.result.alt = "Menor a 30 mujer";
+                }else if($scope.result.averageAge <60){
+                    $scope.result.img = "images/60.jpg";
+                    $scope.result.alt = "Menor a 60 mujer";
+                }
+            }else{
+                $scope.result.parsedGender = "Hombre";
+                if($scope.result.averageAge <18){
+                    $scope.result.img = "images/18.jpg";
+                    $scope.result.alt = "Menor a 18 Hombre";
+                }else if($scope.result.averageAge <30){
+                    $scope.result.img = "images/30.jpg";
+                    $scope.result.alt = "Menor a 30 hombre";
+                }else if($scope.result.averageAge <60){
+                    $scope.result.img = "images/60.jpg";
+                    $scope.result.alt = "Menor a 60 hombre";
+                }
+            }
         },function errorCallback(response){
             console.log(response);
         });
