@@ -1,0 +1,24 @@
+{
+  "name": "curated-ads-ibm",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Joel Lara <joel.lq@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/joellara/CuratedAdsIBM",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.9",
+    "angular": "^1.5.9",
+    "bootstrap": "^3.3.7",
+    "webcam": "webcam-directive#^3.1.1"
+  }
+}
