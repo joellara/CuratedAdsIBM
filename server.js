@@ -11,10 +11,9 @@ var path = require('path');
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
 var app = express();
-var cred = appEnv.getServiceCreds('ViCuratedAds');
-console.log(cred);
+var credentialsVR = appEnv.getServiceCreds('ViCuratedAds');
 var visual_recognition = watson.visual_recognition({
-	api_key: cred['api_key'],
+	api_key: credentialsVR['api_key'],
 	version: 'v3',
 	version_date: '2016-05-19'
 });
