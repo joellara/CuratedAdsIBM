@@ -13,7 +13,7 @@ var appEnv = cfenv.getAppEnv();
 var app = express();
 console.log(appEnv);
 var visual_recognition = watson.visual_recognition({
-	api_key: appEnv.services.watson_vision_combined.credentials.api_key,
+	api_key: appEnv.services.watson_vision_combined.credentials.['api_key'],
 	version: 'v3',
 	version_date: '2016-05-19'
 });
