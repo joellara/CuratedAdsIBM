@@ -9,11 +9,11 @@ var path = require('path');
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
 var cfenv = require('cfenv');
-
+var appEnv = cfenv.getAppEnv();
 var app = express();
 
 var visual_recognition = watson.visual_recognition({
-	api_key: '81c4ef028bae3feb49ee20b85cc339e39aeb56c5',
+	api_key: appEnv.VCAP_SERVICES.watson_vision_combined.credentials.api_key,
 	version: 'v3',
 	version_date: '2016-05-19'
 });
@@ -24,7 +24,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));                                 
 
 // get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
 //API request
 function parseBase64Image(imageBase64) {
   var matches = imageBase64.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
