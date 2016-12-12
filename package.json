@@ -1,8 +1,8 @@
 {
-  "name": "NodejsStarterApp",
+  "name": "curatedadsibm",
   "version": "0.0.1",
   "private": true,
-  "main": "server.js",
+  "main": "nodemon server.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -23,5 +23,9 @@
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
+  },
+  "author": {
+    "name": "Joel Lara",
+    "email": "joel.lq@hotmail.com"
   }
 }

@@ -4,7 +4,8 @@
 angular
   .module('curatedAdsIBM', [
     'ngRoute',
-    'webcam'
+    'webcam',
+    'youtube-embed'
   ])
   .config(function ($routeProvider) {
     $routeProvider
