@@ -1,8 +1,6 @@
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var watson = require('watson-developer-cloud');
-var uuid = require('uuid');
 var os = require('os');
 var fs = require('fs');
 var path = require('path');
@@ -13,15 +11,27 @@ var appEnv = cfenv.getAppEnv();
 var app = express();
 var credentialsVR = appEnv.getServiceCreds('ViCuratedAds');
 var visual_recognition = watson.visual_recognition({
-	api_key: credentialsVR['api_key'],
-	version: 'v3',
-	version_date: '2016-05-19'
+  api_key: credentialsVR.api_key,
+  version: 'v3',
+  version_date: '2016-05-19'
 });
-
+app.enable('trust proxy');
+app.use(function (req, res, next) {
+  if (req.secure) {
+    next();
+  } else {
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
 app.use(express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));                                 
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(bodyParser.json({
+  limit: '50mb'
+}));
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  extended: true
+}));
 
 // get the app environment from Cloud Foundry
 //API request
@@ -38,29 +48,33 @@ function parseBase64Image(imageBase64) {
   return resource;
 }
 
-app.post('/detectface',function(req,res){
+app.post('/detectface', function (req, res) {
 
   //Save to temp
   var resource = parseBase64Image(req.body.imgBase64);
   var temp = path.join(os.tmpdir(), 'tempImage.' + resource.type);
   fs.writeFileSync(temp, resource.data);
-  var params= {};
+  var params = {};
   params.images_file = fs.createReadStream(temp);
   visual_recognition.detectFaces(params,
-    function(err, response) {
+    function (err, response) {
       if (err)
-        res.status(400).json({error:err});
+        res.status(400).json({
+          error: err
+        });
       else
-        res.status(200).json({data:JSON.stringify(response, null, 2)});
+        res.status(200).json({
+          data: JSON.stringify(response, null, 2)
+        });
     }
   );
 });
 //Send to Angular
-app.get('*', function(req, res) {
-	res.sendFile(path.join(__dirname,'/public/index.html'));
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 //Start server
-app.listen(appEnv.port, appEnv.bind, function() {
-	console.log("server starting on " + appEnv.url);
+app.listen(appEnv.port, appEnv.bind, function () {
+  console.log("server starting on " + appEnv.url);
 });
