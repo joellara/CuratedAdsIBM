@@ -5,9 +5,10 @@ angular.module('curatedAdsIBM')
 
     $scope.result = "";
 
-    $scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
+    $scope.patOpts = {x: 0, y: 0, w: 10, h: 10};
 
     $scope.channel = {};
+    $scope.tests = [];
 
     $scope.webcamError = false;
     $scope.onError = function (err) {
@@ -55,8 +56,8 @@ angular.module('curatedAdsIBM')
 
     var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
         $scope.snapshotData = imgBase64;
+        
         $http.post('/detectface',{imgBase64}).then(function successCallback(response){
-            console.log(response);
             $scope.result = JSON.parse(response.data.data).images[0].faces[0];
             $scope.result.averageAge = Math.floor(($scope.result.age.min + $scope.result.age.max)/2);
             if($scope.result.gender.gender  == "FEMALE"){
@@ -84,6 +85,7 @@ angular.module('curatedAdsIBM')
                     $scope.result.alt = "Menor a 60 hombre";
                 }
             }
+            $scope.tests.push({age:$scope.result.averageAge,gender:$scope.result.parsedGender});
         },function errorCallback(response){
             console.log(response);
         });
