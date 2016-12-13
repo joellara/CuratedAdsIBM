@@ -1,7 +1,6 @@
 angular.module('curatedAdsIBM')
     .controller('MainCtrl', function ($scope, $http) {
-        var _video = null,
-            patData = null;
+        var _video = null;
 
         $scope.result = undefined;
 
@@ -45,7 +44,6 @@ angular.module('curatedAdsIBM')
                 var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y, $scope.patOpts.w, $scope.patOpts.h);
                 ctxPat.putImageData(idata, 0, 0);
                 sendSnapshotToServer(patCanvas.toDataURL('image/png'));
-                patData = idata;
             }
         };
 
@@ -107,6 +105,7 @@ angular.module('curatedAdsIBM')
         };
 
         $scope.$on('youtube.player.ended', function ($event, player) {
+            //player
             $scope.makeSnapshot();
         });
 
