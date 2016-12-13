@@ -1,10 +1,11 @@
 {
-  "name": "curatedadsibm",
+  "name": "CuratedAdsIBM",
   "version": "0.0.3",
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
