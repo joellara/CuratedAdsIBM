@@ -23,7 +23,6 @@
     "node": "4.x",
     "npm": "3.10.x"
   },
-  "cacheDirectories": ["node_modules","bower_components"],
   "devDependencies": {
     "nodemon": "^1.11.0"
   },
