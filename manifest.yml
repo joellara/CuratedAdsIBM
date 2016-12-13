@@ -6,6 +6,7 @@ applications:
   name: CuratedAdsIBM
   host: CuratedAdsIBM
   buildpack: nodejs_buildpack
+  command: node server.js
   disk_quota: 1024M
   services:
   - ViCuratedAds

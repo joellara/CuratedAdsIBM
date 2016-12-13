@@ -20,7 +20,8 @@
   },
   "repository": {},
   "engines": {
-    "node": "6.x"
+    "node": "4.x",
+    "npm": "3.10.x"
   },
   "cacheDirectories": ["node_modules","bower_components"],
   "devDependencies": {

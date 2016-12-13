@@ -70,25 +70,25 @@ angular.module('curatedAdsIBM')
                 if ($scope.result.gender.gender == "FEMALE") {
                     if ($scope.result.averageAge < 18) {
                         $scope.result.parsedGender = "Mujer";
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 18 mujer";
                     } else if ($scope.result.averageAge < 30) {
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 30 mujer";
                     } else if ($scope.result.averageAge < 60) {
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 60 mujer";
                     }
                 } else {
                     $scope.result.parsedGender = "Hombre";
                     if ($scope.result.averageAge < 18) {
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 18 Hombre";
                     } else if ($scope.result.averageAge < 30) {
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 30 hombre";
                     } else if ($scope.result.averageAge < 60) {
-                        $scope.result.src = "https://www.youtube.com/watch?v=rGKgAPveMyo";
+                        $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 60 hombre";
                     }
                 }
