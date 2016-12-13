@@ -2,7 +2,8 @@ angular.module('curatedAdsIBM')
     .controller('MainCtrl', function ($scope, $http) {
         var _video = null;
 
-        $scope.result = undefined;
+        $scope.result = {};
+        $scope.result.src = "lqT_dPApj9U"; //coca cola base
 
         $scope.patOpts = {
             x: 0,
@@ -10,7 +11,12 @@ angular.module('curatedAdsIBM')
             w: 10,
             h: 10
         };
-        $scope._player = undefined;
+        $scope.player = {
+            vars:{
+                autoplay: 1
+            },
+            player:null
+        };
         $scope.channel = {};
         $scope.tests = [];
 
@@ -90,8 +96,8 @@ angular.module('curatedAdsIBM')
                         $scope.result.alt = "Menor a 60 hombre";
                     }
                 }
-                if ($scope._player) {
-                    $scope._player.playVideo();
+                if ($scope.player.player) {
+                    $scope.player.player.playVideo();
                 } else {
                     console.error("Player not detected");
                 }
