@@ -77,23 +77,26 @@ angular.module('curatedAdsIBM')
                         $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 18 mujer";
                     } else if ($scope.result.averageAge < 30) {
-                        $scope.result.src = "rGKgAPveMyo";
+                        $scope.result.src = "Rm-vBq-1T1k";
                         $scope.result.alt = "Menor a 30 mujer";
-                    } else if ($scope.result.averageAge < 60) {
-                        $scope.result.src = "rGKgAPveMyo";
+                    } else{
+                        $scope.result.src = "0Rmz9_jagKo";
                         $scope.result.alt = "Menor a 60 mujer";
                     }
                 } else {
                     $scope.result.parsedGender = "Hombre";
                     if ($scope.result.averageAge < 18) {
-                        $scope.result.src = "rGKgAPveMyo";
+                        $scope.result.src = "WhfntLl6xx0";
                         $scope.result.alt = "Menor a 18 Hombre";
                     } else if ($scope.result.averageAge < 30) {
-                        $scope.result.src = "rGKgAPveMyo";
+                        $scope.result.src = "_P2WIq3DLgY";
                         $scope.result.alt = "Menor a 30 hombre";
                     } else if ($scope.result.averageAge < 60) {
-                        $scope.result.src = "rGKgAPveMyo";
+                        $scope.result.src = "pOiiPxb-Gbw";
                         $scope.result.alt = "Menor a 60 hombre";
+                    }else{
+                        $scope.result.src = "pOiiPxb-Gbw";
+                        $scope.result.alt = "Mayor a 60 hombre";
                     }
                 }
                 if ($scope.player.player) {
