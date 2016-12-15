@@ -41,3 +41,4 @@ dist
 .sass-cache
 bower_components
 .vscode/
+.DS_Store

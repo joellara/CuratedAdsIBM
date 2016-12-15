@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>CuratedAds IBM</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  </head>
+<head>
+  <title>CuratedAds IBM</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
 
-  <body ng-app="curatedAdsIBM">
-    <ng-view></ng-view>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
+<body ng-app="curatedAdsIBM">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img alt="IBM" src="img/ibmlogo.png">
+        </a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="//www.ibm.com/">IBM</a></li>
+         <li><a href="//www.ibm.com/bluemix">Bluemix</a></li>
+      </ul>
+    </div>
+  </nav>
+  <ng-view></ng-view>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="bower_components/webcam/dist/webcam.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
+</body>
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="bower_components/webcam/dist/webcam.min.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
-  </body>
 </html>

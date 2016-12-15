@@ -1,36 +1,41 @@
 <div class="container">
-    <div class="jumbotron">
-        <h2>Anuncios publicitarios dependiendo de la persona.</h1>
-            <h4>Toma un snapshot para analizarla</h4>
+    <div class="page-header">
+        <h1 class="text-primary">Anuncios publicitarios dependiendo de la persona.</h1>
+        <h3 class="text-danger"> Toma un snapshot para analizarla</h3>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Webcam:</h3>
-            <webcam class="well-small pull-right" on-error="onError(err)" on-streaming="onSuccess()" channel="channel">
-                <div class="alert alert-error" ng-show="webcamError">
-                    <span>La camara no pudo iniciar, ¿Se le dió accesso?</span>
-                </div>
-            </webcam>
-            <button class="btn btn-lg btn-primary" ng-click="makeSnapshot()">Toma snapshot!</button>
+</div>
+<div class="container-fluid" style="background-color: #f4f4f4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Webcam:</h3>
+                <webcam on-error="onError(err)" on-streaming="onSuccess()" channel="channel">
+                    <div class="alert alert-error" ng-show="webcamError">
+                        <span>La camara no pudo iniciar, ¿Se le dió accesso?</span>
+                    </div>
+                </webcam>
+                <button class="btn btn-lg btn-primary" ng-click="makeSnapshot()">Toma snapshot!</button>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Result</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="test in tests track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td>{{ test.age }}</td>
+                            <td>{{ test.gender }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-md-6">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Result</th>
-                        <th>Age</th>
-                        <th>Gender</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="test in tests track by $index">
-                        <td>{{$index + 1}}</td>
-                        <td>{{ test.age }}</td>
-                        <td>{{ test.gender }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <br>
     </div>
 </div>
 <div class="container">
@@ -46,4 +51,8 @@
             </div>
         </div>
     </div>
+    <hr/>
+    <footer class="footer">
+        <h5>Created by Joel Lara with <b>Bluemix</b></h5>
+    </footer>
 </div>
