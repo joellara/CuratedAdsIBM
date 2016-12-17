@@ -5,6 +5,7 @@ var os = require('os');
 var fs = require('fs');
 var path = require('path');
 var cfenv = require('cfenv');
+var Cloudant = require('cloudant');
 
 var app = express();
 var appEnv = cfenv.getAppEnv();
@@ -13,7 +14,7 @@ var appEnv = cfenv.getAppEnv();
 var credentialsVR = appEnv.getServiceCreds('ViCuratedAds');
 var _api_key;
 if (!credentialsVR) {
-  _api_key = '81c4ef028bae3feb49ee20b85cc339e39aeb56c5';
+  _api_key = process.env.visual_recognition_api;
 } else {
   _api_key = credentialsVR.api_key;
 }
@@ -22,6 +23,17 @@ var visual_recognition = watson.visual_recognition({
   version: 'v3',
   version_date: '2016-05-19'
 });
+
+var credentialsCloud;
+if(appEnv.cloudantNoSQLDB){
+  credentialsCloud = appEnv.cloudantNoSQLDB.credentials;
+}else{
+  credentialsCloud = {
+    username: process.env.cloudant_username,
+    password: process.env.cloudant_password
+  };
+}
+var cloudant = Cloudant({account:credentialsCloud.username, password:credentialsCloud.password});
 
 
 //Redirect to https

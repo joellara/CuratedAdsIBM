@@ -9,15 +9,15 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
     "cfenv": "1.0.x",
+    "cloudant": "^1.6.2",
     "express": "4.13.x",
     "fs": "0.0.1-security",
     "multer": "^1.2.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
-    "uuid": "^3.0.1",
-    "watson-developer-cloud": "^2.11.0",
-    "bower":"^1.8.0"
+    "watson-developer-cloud": "^2.11.0"
   },
   "repository": {},
   "engines": {
@@ -25,6 +25,7 @@
     "npm": "3.10.x"
   },
   "devDependencies": {
+    "dotenv": "^2.0.0",
     "nodemon": "^1.11.0"
   },
   "author": {

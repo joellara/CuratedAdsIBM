@@ -42,3 +42,4 @@ dist
 bower_components
 .vscode/
 .DS_Store
+/.env
