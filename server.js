@@ -26,6 +26,7 @@ var visual_recognition = watson.visual_recognition({
 });
 
 var credentialsCloud;
+console.log(appEnv.services);
 if(appEnv.services.cloudantNoSQLDB){
   credentialsCloud = appEnv.services.cloudantNoSQLDB.credentials;
 }else{
