@@ -26,9 +26,9 @@ var visual_recognition = watson.visual_recognition({
 });
 
 var credentialsCloud;
-console.log(appEnv.services);
-if(appEnv.services.cloudantNoSQLDB){
-  credentialsCloud = appEnv.services.cloudantNoSQLDB.credentials;
+console.log(JSON.stringify(appEnv.services));
+if(appEnv.services.StatisticsCuratedAds){
+  credentialsCloud = appEnv.services.StatisticsCuratedAds.credentials;
 }else{
   credentialsCloud = {
     username: process.env.cloudant_username,
