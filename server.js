@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-require('dotenv').load();
+require('dotenv').config({silent: true});
 var watson = require('watson-developer-cloud');
 var os = require('os');
 var fs = require('fs');
@@ -26,8 +26,8 @@ var visual_recognition = watson.visual_recognition({
 });
 
 var credentialsCloud;
-if(appEnv.cloudantNoSQLDB){
-  credentialsCloud = appEnv.cloudantNoSQLDB.credentials;
+if(appEnv.services.cloudantNoSQLDB){
+  credentialsCloud = appEnv.services.cloudantNoSQLDB.credentials;
 }else{
   credentialsCloud = {
     username: process.env.cloudant_username,
@@ -35,8 +35,9 @@ if(appEnv.cloudantNoSQLDB){
   };
 }
 var cloudant = Cloudant({account:credentialsCloud.username, password:credentialsCloud.password});
-
-
+cloudant.db.list(function(err, allDbs) {
+  console.log('All my databases: %s', allDbs.join(', '));
+});
 //Redirect to https
 app.enable('trust proxy');
 app.use(function (req, res, next) {
