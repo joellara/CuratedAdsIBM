@@ -25,11 +25,9 @@ var visual_recognition = watson.visual_recognition({
   version_date: '2016-05-19'
 });
 
-var credentialsCloud;
-console.log(JSON.stringify(appEnv.services));
-if(appEnv.services.StatisticsCuratedAds){
-  credentialsCloud = appEnv.services.StatisticsCuratedAds.credentials;
-}else{
+var credentialsCloud = appEnv.getServiceCreds('StatisticsCuratedAds');
+//console.log(JSON.stringify(appEnv.services));
+if(!credentialsCloud){
   credentialsCloud = {
     username: process.env.cloudant_username,
     password: process.env.cloudant_password
@@ -39,6 +37,7 @@ var cloudant = Cloudant({account:credentialsCloud.username, password:credentials
 cloudant.db.list(function(err, allDbs) {
   console.log('All my databases: %s', allDbs.join(', '));
 });
+
 //Redirect to https
 app.enable('trust proxy');
 app.use(function (req, res, next) {
