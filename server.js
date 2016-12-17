@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+require('dotenv').load();
 var watson = require('watson-developer-cloud');
 var os = require('os');
 var fs = require('fs');
