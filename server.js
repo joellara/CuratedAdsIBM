@@ -34,9 +34,7 @@ if(!credentialsCloud){
   };
 }
 var cloudant = Cloudant({account:credentialsCloud.username, password:credentialsCloud.password});
-cloudant.db.list(function(err, allDbs) {
-  console.log('All my databases: %s', allDbs.join(', '));
-});
+var db = cloudant.use("statistics_people");
 
 //Redirect to https
 app.enable('trust proxy');
