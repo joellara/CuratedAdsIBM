@@ -70,7 +70,11 @@ angular.module('curatedAdsIBM')
                 imgBase64
             }).then(function successCallback(response) {
                 $scope.result = JSON.parse(response.data.data).images[0].faces[0];
-                $scope.result.averageAge = Math.floor(($scope.result.age.min + $scope.result.age.max) / 2);
+                if(typeof $scope.result.age.min == "undefined"){
+                    $scope.result.averageAge = $scope.result.age.max;
+                }else{
+                    $scope.result.averageAge = Math.floor(($scope.result.age.min + $scope.result.age.max) / 2);
+                }
                 if ($scope.result.gender.gender == "FEMALE") {
                     $scope.result.parsedGender = "Mujer";
                     if ($scope.result.averageAge < 18) {

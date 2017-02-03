@@ -13,14 +13,13 @@ var appEnv = cfenv.getAppEnv();
 
 //Initiate Visual Recognition Service
 var credentialsVR = appEnv.getServiceCreds('ViCuratedAds');
-var _api_key;
 if (!credentialsVR) {
-  _api_key = process.env.visual_recognition_api;
-} else {
-  _api_key = credentialsVR.api_key;
+  credentialsVR = {
+    api_key: process.env.visual_recognition_api
+  }
 }
 var visual_recognition = watson.visual_recognition({
-  api_key: _api_key,
+  api_key: credentialsVR.api_key,
   version: 'v3',
   version_date: '2016-05-19'
 });
@@ -34,7 +33,7 @@ if(!credentialsCloud){
   };
 }
 var cloudant = Cloudant({account:credentialsCloud.username, password:credentialsCloud.password});
-var db = cloudant.use("statistics_people");
+var db = cloudant.db.use("statistics_people");
 
 //Redirect to https
 app.enable('trust proxy');
@@ -82,10 +81,16 @@ app.post('/detectface', function (req, res) {
         res.status(400).json({
           error: err
         });
-      else
+      else{
         res.status(200).json({
           data: JSON.stringify(response, null, 2)
         });
+        var cara1 = response.images[0].faces[0];
+        db.insert(cara1,function(err, body) {
+          if (err)
+            console.err("Hubo error al insertar en la base de datos");
+        });
+      }
     }
   );
 });
