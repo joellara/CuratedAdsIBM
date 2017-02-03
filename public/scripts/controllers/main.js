@@ -3,7 +3,7 @@ angular.module('curatedAdsIBM')
         var _video = null;
 
         $scope.result = {};
-        $scope.result.src = "lqT_dPApj9U"; //coca cola base
+        $scope.result.src = "VEX7KhIA3bU"; //coca cola base
 
         $scope.patOpts = {
             x: 0,
@@ -108,6 +108,10 @@ angular.module('curatedAdsIBM')
                     age: $scope.result.averageAge,
                     gender: $scope.result.parsedGender
                 });
+                if($scope.tests.length > 10){
+                    console.log("mayor");
+                    $scope.tests.shift();
+                }
             }, function errorCallback(response) {
                 console.log(response);
             });
