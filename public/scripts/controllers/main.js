@@ -65,11 +65,10 @@ angular.module('curatedAdsIBM')
 
         var sendSnapshotToServer = function sendSnapshotToServer(imgBase64) {
             $scope.snapshotData = imgBase64;
-
             $http.post('/detectface', {
                 imgBase64
             }).then(function successCallback(response) {
-                $scope.result = JSON.parse(response.data.data);
+                $scope.result = response.data;
                 if ($scope.result.gender == "FEMALE") {
                     $scope.result.parsedGender = "Mujer";
                     if ($scope.result.age < 18) {

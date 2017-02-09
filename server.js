@@ -84,9 +84,7 @@ app.post('/detectface', function (req, res) {
         });
       else{
         var rst = parseResponseToDB(response);
-        res.status(200).json({
-          data: JSON.stringify(rst, null, 2)
-        });
+        res.status(200).json(rst);
         db.insert(rst,function(err, body) {
           if (err)
             console.err("Hubo error al insertar en la base de datos");
