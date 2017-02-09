@@ -25,7 +25,6 @@ var visual_recognition = watson.visual_recognition({
 });
 
 var credentialsCloud = appEnv.getServiceCreds('StatisticsCuratedAds');
-//console.log(JSON.stringify(appEnv.services));
 if(!credentialsCloud){
   credentialsCloud = {
     username: process.env.cloudant_username,
@@ -57,17 +56,19 @@ app.use(bodyParser.urlencoded({
 
 // get the app environment from Cloud Foundry
 //API request
-function parseBase64Image(imageBase64) {
-  var matches = imageBase64.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
-  var resource = {};
-  if (matches.length !== 3) {
-    return null;
-  }
-  resource.type = matches[1] === 'jpeg' ? 'jpg' : matches[1];
-  resource.data = new Buffer(matches[2], 'base64');
-  return resource;
-}
-
+app.get('/getdocs',function(req, res){
+  db.list({include_docs:true},function(err,body){
+    if(err){
+      res.status(400).json({
+        error:err
+      });
+    }else{
+      res.status(200).json({
+        data:JSON.stringify(body.rows,null,2)
+      });
+    }
+  });
+});
 app.post('/detectface', function (req, res) {
   //Save to temp
   var resource = parseBase64Image(req.body.imgBase64);
@@ -82,11 +83,11 @@ app.post('/detectface', function (req, res) {
           error: err
         });
       else{
+        var rst = parseResponseToDB(response);
         res.status(200).json({
-          data: JSON.stringify(response, null, 2)
+          data: JSON.stringify(rst, null, 2)
         });
-        var cara1 = response.images[0].faces[0];
-        db.insert(cara1,function(err, body) {
+        db.insert(rst,function(err, body) {
           if (err)
             console.err("Hubo error al insertar en la base de datos");
         });
@@ -103,3 +104,28 @@ app.get('*', function (req, res) {
 app.listen(appEnv.port, appEnv.bind, function () {
   console.log('Listening on port ' + appEnv.url);
 });
+
+function parseResponseToDB(response){
+  var face = response.images[0].faces[0];
+  if(typeof face.age.min == "undefined"){
+    face.age = face.age.max;
+  }else{
+    face.age = Math.floor((face.age.min + face.age.max) / 2);
+  }
+  face.gender = face.gender.gender;
+  delete face.face_location; 
+  delete face.identity;
+  face.date = new Date().toUTCString();
+  return face;      
+}
+
+function parseBase64Image(imageBase64) {
+  var matches = imageBase64.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+  var resource = {};
+  if (matches.length !== 3) {
+    return null;
+  }
+  resource.type = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+  resource.data = new Buffer(matches[2], 'base64');
+  return resource;
+}

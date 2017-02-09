@@ -69,18 +69,13 @@ angular.module('curatedAdsIBM')
             $http.post('/detectface', {
                 imgBase64
             }).then(function successCallback(response) {
-                $scope.result = JSON.parse(response.data.data).images[0].faces[0];
-                if(typeof $scope.result.age.min == "undefined"){
-                    $scope.result.averageAge = $scope.result.age.max;
-                }else{
-                    $scope.result.averageAge = Math.floor(($scope.result.age.min + $scope.result.age.max) / 2);
-                }
-                if ($scope.result.gender.gender == "FEMALE") {
+                $scope.result = JSON.parse(response.data.data);
+                if ($scope.result.gender == "FEMALE") {
                     $scope.result.parsedGender = "Mujer";
-                    if ($scope.result.averageAge < 18) {
+                    if ($scope.result.age < 18) {
                         $scope.result.src = "rGKgAPveMyo";
                         $scope.result.alt = "Menor a 18 mujer";
-                    } else if ($scope.result.averageAge < 30) {
+                    } else if ($scope.result.age < 30) {
                         $scope.result.src = "Rm-vBq-1T1k";
                         $scope.result.alt = "Menor a 30 mujer";
                     } else{
@@ -89,13 +84,13 @@ angular.module('curatedAdsIBM')
                     }
                 } else {
                     $scope.result.parsedGender = "Hombre";
-                    if ($scope.result.averageAge < 18) {
+                    if ($scope.result.age < 18) {
                         $scope.result.src = "WhfntLl6xx0";
                         $scope.result.alt = "Menor a 18 Hombre";
-                    } else if ($scope.result.averageAge < 30) {
+                    } else if ($scope.result.age < 30) {
                         $scope.result.src = "_P2WIq3DLgY";
                         $scope.result.alt = "Menor a 30 hombre";
-                    } else if ($scope.result.averageAge < 60) {
+                    } else if ($scope.result.age < 60) {
                         $scope.result.src = "pOiiPxb-Gbw";
                         $scope.result.alt = "Menor a 60 hombre";
                     }else{
@@ -109,11 +104,10 @@ angular.module('curatedAdsIBM')
                     console.error("Player not detected");
                 }
                 $scope.tests.push({
-                    age: $scope.result.averageAge,
+                    age: $scope.result.age,
                     gender: $scope.result.parsedGender
                 });
                 if($scope.tests.length > 10){
-                    console.log("mayor");
                     $scope.tests.shift();
                 }
             }, function errorCallback(response) {
@@ -125,7 +119,7 @@ angular.module('curatedAdsIBM')
             //player
             $scope.makeSnapshot();
         });
-
+ 
         (function () {
             var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                 window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
