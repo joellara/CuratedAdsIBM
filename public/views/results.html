@@ -6,17 +6,16 @@
         <div class="col-sm-12">
             <h1>Gender</h1>
         </div>
-        <div class="col-sm-6">Male:</div>
-        <div class="col-sm-6">{{maleCount}}</div>
-        <div class="col-sm-6">Female:</div>
-        <div class="col-sm-6">{{femaleCount}}</div>
-        <div class="col-sm-12"><h1>Age</h1></div>
         <div class="col-sm-12">
-        <ul>
-            <li ng-repeat="age in ages track by $index">
-                {{age}}
-            </li>
-        </ul>
+            <canvas id="doughnut" class="chart chart-doughnut"chart-data="dataGender" chart-labels="labelsGender">
+            </canvas> 
+        </div>
+        <div class="col-sm-12">
+            <h1>Age</h1>
+        </div>
+        <div class="col-sm-12">
+            <canvas id="doughnut" class="chart chart-doughnut"chart-data="dataAges" chart-labels="labelsAges">
+            </canvas> 
         </div>
     </div>
 </div>

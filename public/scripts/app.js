@@ -3,7 +3,8 @@ angular
   .module('curatedAdsIBM', [
     'ngRoute',
     'webcam',
-    'youtube-embed'
+    'youtube-embed',
+    'chart.js'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

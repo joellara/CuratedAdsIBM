@@ -46,6 +46,7 @@ app.use(function (req, res, next) {
 
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use(bodyParser.json({
   limit: '50mb'
 }));
