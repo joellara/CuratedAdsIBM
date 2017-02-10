@@ -21,4 +21,8 @@ angular
         redirectTo: '/'
       });
       $locationProvider.html5Mode(true);
-  });
+  }).config(['ChartJsProvider', function (ChartJsProvider) {
+    ChartJsProvider.setOptions({
+      chartColors: ['#ADC8FA', '#FF8A80','#2DB82D']
+    });
+  }]);
